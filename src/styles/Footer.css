@@ -1,0 +1,21 @@
+.resources {
+  width: 100vw;
+  bottom: 0;
+  text-align: center;
+}
+
+.resourceLink {
+  color: #1c2e3f;
+  text-decoration: none;
+  margin: 2rem;
+}
+
+.resourceLink:hover {
+  color: #3e648a;
+}
+
+.copyRight {
+  color: #1c2e3f;
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
