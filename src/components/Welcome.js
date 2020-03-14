@@ -26,12 +26,12 @@ const Welcome = () => {
     <header>
       <AnimatedLogo />
       <div className="topBox" style={{ minHeight: height / 2 }}>
-        <Link to="/getstarted">
-          <button className="buttonLight">Get started</button>
+        <Link style={{ outline: "none" }} to="/getstarted">
+          <button className="buttonLight getStartedButton">Get started</button>
         </Link>
       </div>
       <div className="bottomBox" style={{ minHeight: height / 2 }}>
-        <button className="buttonDark">Login</button>
+        <button className="buttonDark loginButton">Login</button>
         <Footer />
       </div>
     </header>

@@ -2,6 +2,7 @@ import React from "react";
 
 import "../styles/GetStarted.css";
 import "../styles/common/buttonLight.css";
+import "../styles/common/buttonLinkLight.css";
 import AnimatedLogo from "./AnimatedLogo";
 
 const GetStarted = () => {
@@ -17,7 +18,9 @@ const GetStarted = () => {
           <br />
           <input placeholder="Enter Objective" />
           <br />
-          <button className="buttonLight">Continue</button>
+          <button className="buttonLight continueButton">Continue</button>
+          <br />
+          <button className="buttonLink">Skip</button>
         </div>
       </div>
     </>

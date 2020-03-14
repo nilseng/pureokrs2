@@ -10,3 +10,13 @@
   min-height: 50vh;
   text-align: center;
 }
+
+.loginButton {
+  margin-top: 12rem;
+  margin-bottom: 15vh;
+}
+
+.getStartedButton {
+  margin-top: 12rem;
+  outline: none;
+}

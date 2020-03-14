@@ -1,6 +1,5 @@
 .buttonLight {
   width: 15rem;
-  margin-top: 12rem;
   padding: 1rem;
   background-color: #1c2e3f00;
   color: #f8f9fa;
@@ -9,5 +8,12 @@
   font-size: 2rem;
   font-weight: 200;
   cursor: pointer;
+  outline: none;
+}
+
+.buttonLight:focus,
+.buttonLight:hover {
+  border-color: #b2b3b4;
+  color: #b2b3b4;
   outline: none;
 }

@@ -26,3 +26,7 @@ input {
   font-weight: 200;
   outline: none;
 }
+
+.continueButton {
+  margin-top: 6rem;
+}

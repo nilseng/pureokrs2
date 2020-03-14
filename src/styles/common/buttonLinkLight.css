@@ -1,0 +1,13 @@
+.buttonLink {
+  color: #f8f9fa;
+  background-color: #1c2e3f;
+  border-radius: 10rem;
+  border-color: #1c2e3f;
+  cursor: pointer;
+  outline: none;
+}
+
+.buttonLink:focus,
+.buttonLink:hover {
+  color: #b2b3b4;
+}
