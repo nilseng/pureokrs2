@@ -11,19 +11,6 @@
   text-align: center;
 }
 
-.buttonLight {
-  width: 20rem;
-  margin-top: 20vh;
-  padding: 1.5rem;
-  background-color: #1c2e3f00;
-  color: #f8f9fa;
-  border-color: #f8f9fa;
-  border-radius: 10rem;
-  font-size: 2rem;
-  font-weight: 200;
-  cursor: pointer;
-}
-
 .buttonDark {
   background-color: #f8f9fa;
   width: 20rem;

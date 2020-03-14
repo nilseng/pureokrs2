@@ -1,0 +1,24 @@
+.container {
+  background-color: #1c2e3f;
+  color: #f8f9fa;
+  min-height: 80vh;
+  text-align: center;
+  font-size: 2rem;
+  padding-top: 20vh;
+}
+
+label {
+  font-weight: 200;
+}
+
+input {
+  background-color: #f8f9fa;
+  border: none;
+  padding: 1rem;
+  margin: 4rem;
+  border-radius: 8px;
+  width: 40rem;
+  font-size: 1.5rem;
+  font-weight: 200;
+  outline: none;
+}

@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import "../styles/App.css";
 import Welcome from "./Welcome";
+import GetStarted from "./GetStarted";
 import NotFoundPage from "./NotFoundPage";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/" component={Welcome} exact />
+        <Route path="/getstarted" component={GetStarted} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
