@@ -7,7 +7,7 @@
 
 .bottomBox {
   background-color: #f8f9fa;
-  height: 50vh;
+  min-height: 50vh;
   text-align: center;
 }
 
