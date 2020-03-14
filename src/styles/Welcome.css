@@ -10,18 +10,3 @@
   min-height: 50vh;
   text-align: center;
 }
-
-.buttonDark {
-  background-color: #f8f9fa;
-  width: 20rem;
-  margin-top: 15vh;
-  margin-bottom: 15vh;
-  padding: 1.5rem;
-  background-color: #f8f9fa00;
-  color: #1c2e3f;
-  border-color: #1c2e3f;
-  border-radius: 10rem;
-  font-size: 2rem;
-  font-weight: 200;
-  cursor: pointer;
-}

@@ -9,14 +9,16 @@ const GetStarted = () => {
     <>
       <AnimatedLogo />
       <div className="container">
-        <label>
-          Get started by entering your first objective. <br /> What would you
-          like to accomplish?
-        </label>
-        <br />
-        <input placeholder="Enter Objective" />
-        <br />
-        <button className="buttonLight">Continue</button>
+        <div className="formContainer">
+          <label>
+            Get started by entering your first objective. <br /> What would you
+            like to accomplish?
+          </label>
+          <br />
+          <input placeholder="Enter Objective" />
+          <br />
+          <button className="buttonLight">Continue</button>
+        </div>
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import "../styles/Welcome.css";
 import "../styles/common/buttonLight.css";
+import "../styles/common/buttonDark.css";
 import Footer from "./Footer";
 import AnimatedLogo from "./AnimatedLogo";
 
