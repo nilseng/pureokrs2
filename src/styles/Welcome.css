@@ -1,0 +1,63 @@
+.topBox {
+  background-color: #1c2e3f;
+  height: 50vh;
+  top: 0;
+  text-align: center;
+}
+
+.bottomBox {
+  background-color: #f8f9fa;
+  height: 50vh;
+  text-align: center;
+}
+
+.buttonLight {
+  width: 20rem;
+  margin-top: 20vh;
+  padding: 1.5rem;
+  background-color: #1c2e3f00;
+  color: #f8f9fa;
+  border-color: #f8f9fa;
+  border-radius: 10rem;
+  font-size: 2rem;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+.buttonDark {
+  background-color: #f8f9fa;
+  width: 20rem;
+  margin-top: 20vh;
+  padding: 1.5rem;
+  background-color: #f8f9fa00;
+  color: #1c2e3f;
+  border-color: #1c2e3f;
+  border-radius: 10rem;
+  font-size: 2rem;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+.resources {
+  width: 100vw;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  padding-bottom: 0rem;
+}
+
+.resourceLink {
+  color: #1c2e3f;
+  text-decoration: none;
+  margin: 2rem;
+}
+
+.resourceLink:hover {
+  color: #3e648a;
+}
+
+.copyRight {
+  color: #1c2e3f;
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
