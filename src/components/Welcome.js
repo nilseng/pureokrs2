@@ -22,8 +22,8 @@ const Welcome = () => {
         <button className="buttonDark" style={{ marginTop: "15vh" }}>
           Login
         </button>
-        <Footer />
       </div>
+      <Footer />
     </header>
   );
 };
