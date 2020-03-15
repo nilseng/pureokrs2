@@ -12,8 +12,8 @@ const useWindowHeight = () => {
       setHeight(window.innerHeight);
     }
     updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
+    window.addEventListener("orientationchange", updateHeight);
+    return () => window.removeEventListener("orientationchange", updateHeight);
   });
   return height;
 };
@@ -23,7 +23,7 @@ const GetStarted = () => {
   return (
     <>
       <AnimatedLogo />
-      <div className="container">
+      <div className="container" style={{ minHeight: height }}>
         <div style={{ paddingTop: height / 6 }}>
           <label>
             Get started by entering your first objective. <br /> What would you

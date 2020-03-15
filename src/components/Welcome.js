@@ -14,8 +14,8 @@ const useWindowHeight = () => {
       setHeight(window.innerHeight);
     }
     updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
+    window.addEventListener("orientationchange", updateHeight);
+    return () => window.removeEventListener("orientationchange", updateHeight);
   });
   return height;
 };
