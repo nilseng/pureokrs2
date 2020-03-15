@@ -5,8 +5,8 @@ const AnimatedLogo = () => {
     <svg
       style={{
         position: "absolute",
-        height: "10rem",
-        width: "10rem",
+        height: "6rem",
+        width: "6rem",
         margin: "1rem"
       }}
       xmlns="http://www.w3.org/2000/svg"
