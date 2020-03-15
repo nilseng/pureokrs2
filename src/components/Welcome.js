@@ -13,10 +13,10 @@ const useWindowHeight = () => {
     function updateHeight() {
       setHeight(window.innerHeight);
     }
-    window.addEventListener("resize", updateHeight);
     updateHeight();
+    window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
-  }, []);
+  });
   return height;
 };
 
@@ -27,12 +27,16 @@ const Welcome = () => {
       <AnimatedLogo />
       <div className="topBox" style={{ minHeight: height / 2 }}>
         <Link style={{ outline: "none" }} to="/getstarted">
-          <button className="buttonLight getStartedButton">Get started</button>
+          <button className="buttonLight" style={{ marginTop: height / 6 }}>
+            Get started
+          </button>
         </Link>
       </div>
       <div className="bottomBox" style={{ minHeight: height / 2 }}>
-        <button className="buttonDark loginButton">Login</button>
-        <Footer />
+        <button className="buttonDark" style={{ marginTop: height / 8 }}>
+          Login
+        </button>
+        <Footer style={{ marginTop: height / 6 }} />
       </div>
     </header>
   );

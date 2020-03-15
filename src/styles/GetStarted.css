@@ -6,10 +6,6 @@
   font-size: 2rem;
 }
 
-.formContainer {
-  padding-top: 10rem;
-}
-
 label {
   font-weight: 200;
 }
@@ -18,15 +14,10 @@ input {
   background-color: #f8f9fa;
   border: none;
   padding: 1rem;
-  margin-top: 4rem;
   border-radius: 8px;
   width: 40rem;
   max-width: 90vw;
   font-size: 1.5rem;
   font-weight: 200;
   outline: none;
-}
-
-.continueButton {
-  margin-top: 3rem;
 }

@@ -1,6 +1,7 @@
 .resources {
+  position: absolute;
   width: 100vw;
-  bottom: 0;
+  bottom: 0.5rem;
   text-align: center;
 }
 
@@ -8,6 +9,7 @@
   color: #1c2e3f;
   text-decoration: none;
   margin: 2rem;
+  font-size: 0.8rem;
 }
 
 .resourceLink:hover {
@@ -16,7 +18,7 @@
 
 .copyRight {
   color: #1c2e3f;
-  font-size: 0.8rem;
-  margin-top: 2rem;
+  font-size: 0.5rem;
+  margin-top: 0.5rem;
   margin-bottom: 0;
 }
