@@ -9,4 +9,12 @@
   font-size: 2rem;
   font-weight: 200;
   cursor: pointer;
+  outline: none;
+}
+
+.buttonDark:focus,
+.buttonDark:hover {
+  border-color: #3c6285;
+  color: #3c6285;
+  outline: none;
 }
