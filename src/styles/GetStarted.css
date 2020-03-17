@@ -1,11 +1,12 @@
 .container {
   background-color: #1c2e3f;
   color: #f8f9fa;
-  text-align: center;
   font-size: 2rem;
+  text-align: center;
 }
 
 label {
+  text-align: center;
   font-weight: 200;
 }
 
@@ -14,9 +15,24 @@ input {
   border: none;
   padding: 1rem;
   border-radius: 8px;
-  width: 40rem;
-  max-width: 90vw;
   font-size: 1.5rem;
   font-weight: 200;
   outline: none;
+}
+
+@media screen and (min-width: 720px) {
+  .container {
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+
+  input {
+    width: calc(60vw - 2rem);
+  }
+}
+
+@media screen and (max-width: 720px) {
+  input {
+    width: calc(100vw - 2rem);
+  }
 }

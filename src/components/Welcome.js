@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import "../styles/Welcome.css";
 import "../styles/common/buttonLight.css";
@@ -9,7 +9,9 @@ import AnimatedLogo from "./AnimatedLogo";
 const Welcome = () => {
   return (
     <header>
-      <AnimatedLogo />
+      <NavLink to="/">
+        <AnimatedLogo />
+      </NavLink>
       <div className="topBox" style={{ minHeight: "50vh" }}>
         <Link style={{ outline: "none" }} to="/getstarted">
           <button className="buttonLight" style={{ marginTop: "20vh" }}>
