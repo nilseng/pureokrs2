@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import "../styles/GetStarted.css";
 import "../styles/common/buttonLight.css";
@@ -77,7 +77,9 @@ const GetStarted = () => {
                 Continue
               </button>
               <br />
-              <button className="buttonLink">Skip</button>
+              <Link to="/home">
+                <button className="buttonLink">Skip</button>
+              </Link>
             </>
           )}
           {showKeyResults && objective && (
@@ -137,6 +139,11 @@ const GetStarted = () => {
                     </div>
                   )
               )}
+              <Link to="home">
+                <button className="buttonLight" style={{ marginTop: "5vh" }}>
+                  Continue
+                </button>
+              </Link>
             </>
           )}
         </div>

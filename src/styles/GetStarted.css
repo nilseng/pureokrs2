@@ -3,6 +3,11 @@
   color: #f8f9fa;
   font-size: 2rem;
   text-align: center;
+  background-image: url("../svgs/BgThing.svg");
+  background-repeat: no-repeat;
+  background-position-y: -20vh;
+  background-position-x: -10vw;
+  background-size: 60vmax;
 }
 
 label {

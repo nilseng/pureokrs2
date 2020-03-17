@@ -13,16 +13,18 @@ const Welcome = () => {
         <AnimatedLogo />
       </NavLink>
       <div className="topBox" style={{ minHeight: "50vh" }}>
-        <Link style={{ outline: "none" }} to="/getstarted">
+        <Link style={{ outline: "none" }} to="getstarted">
           <button className="buttonLight" style={{ marginTop: "20vh" }}>
             Get started
           </button>
         </Link>
       </div>
       <div className="bottomBox" style={{ minHeight: "50vh" }}>
-        <button className="buttonDark" style={{ marginTop: "15vh" }}>
-          Login
-        </button>
+        <Link to="home">
+          <button className="buttonDark" style={{ marginTop: "15vh" }}>
+            Login
+          </button>
+        </Link>
       </div>
     </header>
   );

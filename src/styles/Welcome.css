@@ -1,4 +1,9 @@
 .topBox {
+  background-image: url("../svgs/BgThing.svg");
+  background-repeat: no-repeat;
+  background-position-y: -20vh;
+  background-position-x: -10vw;
+  background-size: 60vmax;
   background-color: #1c2e3f;
   text-align: center;
 }
@@ -6,4 +11,8 @@
 .bottomBox {
   background-color: #f8f9fa;
   text-align: center;
+  background-image: url("../svgs/BgThingDarker.svg");
+  background-repeat: no-repeat;
+  background-position-x: 60vw;
+  background-size: 60vmax;
 }
