@@ -50,7 +50,7 @@ const GetStarted = () => {
   useKeyPress();
   return (
     <>
-      <NavLink to="/">
+      <NavLink to="/home">
         <AnimatedLogo />
       </NavLink>
       <div className="container" style={{ minHeight: "100vh" }}>

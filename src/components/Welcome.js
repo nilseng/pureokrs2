@@ -9,7 +9,7 @@ import AnimatedLogo from "./AnimatedLogo";
 const Welcome = () => {
   return (
     <header>
-      <NavLink to="/">
+      <NavLink to="/home">
         <AnimatedLogo />
       </NavLink>
       <div className="topBox" style={{ minHeight: "50vh" }}>

@@ -1,7 +1,9 @@
-import React from "react";
-import Tree from "react-d3-tree";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import * as d3 from "d3";
 
 import AnimatedLogo from "./AnimatedLogo";
+import OKRModal from "./OKRModal";
 import "../styles/Home.css";
 
 const myTreeData = [
@@ -11,22 +13,62 @@ const myTreeData = [
     children: [
       {
         name: "Build a great OKR tool",
+        parent: "Pure Objectives and Key Results",
+        keyResults: [
+          { kr: "Something you can measure" },
+          { kr: "Something challenging, but possible" }
+        ],
+        children: [
+          {
+            name: "Design a nice tree",
+            parent: "Build a great OKR tool"
+          }
+        ],
         attributes: {
           1: "Have x users",
           2: "Get some kudos on product hunt"
         }
       },
       {
-        name: "Be self employed"
+        name: "Be self employed",
+        parent: "Pure Objectives and Key Results",
+        children: [
+          {
+            name: "child of child",
+            parent: "Be self employed"
+          },
+          {
+            name: "second child of child",
+            parent: "Be self employed"
+          }
+        ]
       }
     ]
   }
 ];
 
 const Home = () => {
+  const [okr, setOkr] = useState();
+  const tree = d3.tree();
+  tree.size([100, 100]);
+  tree.nodeSize([20, 12]);
+  tree.separation(function separation(a, b) {
+    return a.parent === b.parent ? 1.0 : 1.4;
+  });
+  const root = tree(d3.hierarchy(myTreeData[0]));
+  const nodes = root.descendants().reverse();
+  nodes.forEach(node => {
+    node.x += 50;
+    node.y += 10;
+  });
+  const links = root.links();
+
   return (
     <>
-      <AnimatedLogo color={"#1c2e3f"} />
+      <NavLink to="/home">
+        <AnimatedLogo color={"#1c2e3f"} />
+      </NavLink>
+      <OKRModal okr={okr} setOkr={setOkr} />
       <div
         style={{
           height: "100vh",
@@ -45,36 +87,35 @@ const Home = () => {
           height: "100vh"
         }}
       >
-        <Tree
-          data={myTreeData}
-          orientation={"vertical"}
-          translate={{ x: window.innerWidth / 2, y: 100 }}
-          textLayout={{
-            textAnchor: "start",
-            x: -95,
-            y: 20,
-            transform: undefined
-          }}
-          nodeSize={{ x: 200, y: 100 }}
-          pathFunc={"straight"}
-          styles={{
-            links: { stroke: "#1c2e3f" },
-            nodes: { fill: "#1c2e3f", text: { fill: "#f8f9fa" } }
-          }}
-          nodeSvgShape={{
-            shape: "rect",
-            shapeProps: {
-              fill: "#1c2e3f",
-              width: 180,
-              height: 90,
-              x: -100,
-              stroke: "none",
-              rx: 4,
-              ry: 4
-            }
-          }}
-          zoom={1}
-        />
+        <svg
+          id="okrTree"
+          height={"100vh"}
+          width={"100vw"}
+          viewBox={"0 0 100 100"}
+        >
+          {links.map(link => (
+            <path
+              d={`M ${link.source.x} ${link.source.y} L ${link.target.x} ${link.target.y} `}
+              stroke="#1c2e3f"
+              strokeWidth="0.1"
+            ></path>
+          ))}
+          {nodes.map(node => (
+            <g>
+              <circle
+                cx={node.x}
+                cy={node.y}
+                r="1"
+                fill="#1c2e3f"
+                style={{ cursor: "pointer" }}
+                onClick={() => setOkr(node.data)}
+              />
+              <text x={node.x + 2} y={node.y + 0.3} style={{ fontSize: "1.5" }}>
+                {node.data.name}
+              </text>
+            </g>
+          ))}
+        </svg>
       </div>
     </>
   );
