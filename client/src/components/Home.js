@@ -30,16 +30,16 @@ const myTreeData = [
         }
       },
       {
-        name: "Be self employed",
+        name: "Have fun",
         parent: "Pure Objectives and Key Results",
         children: [
           {
             name: "child of child",
-            parent: "Be self employed"
+            parent: "Have fun"
           },
           {
             name: "second child of child",
-            parent: "Be self employed"
+            parent: "Have fun"
           }
         ]
       }
