@@ -77,7 +77,7 @@ const GetStarted = () => {
                 Continue
               </button>
               <br />
-              <Link to="/home">
+              <Link to="/okr-tree">
                 <button className="buttonLink">Skip</button>
               </Link>
             </>
