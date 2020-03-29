@@ -1,0 +1,20 @@
+.navLink {
+  background-color: #f8f9fa00;
+  color: #1c2e3f;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  margin: 1rem;
+}
+
+button.navLink {
+  border: none;
+}
+
+.navLink:focus,
+.navLink:hover {
+  color: #3c6285;
+  outline: none;
+  text-decoration: none;
+}

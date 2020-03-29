@@ -1,4 +1,4 @@
-.container {
+.getStartedContainer {
   background-color: #1c2e3f;
   color: #f8f9fa;
   font-size: 2rem;
@@ -26,7 +26,7 @@ input {
 }
 
 @media screen and (min-width: 720px) {
-  .container {
+  .getStartedContainer {
     padding-left: 20vw;
     padding-right: 20vw;
   }

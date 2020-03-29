@@ -50,10 +50,10 @@ const GetStarted = () => {
   useKeyPress();
   return (
     <>
-      <NavLink to="/home">
+      <NavLink to="/okr-tree">
         <AnimatedLogo />
       </NavLink>
-      <div className="container" style={{ minHeight: "100vh" }}>
+      <div className="getStartedContainer" style={{ minHeight: "100vh" }}>
         <div style={{ paddingTop: "20vh" }}>
           {(!showKeyResults || !objective) && (
             <>
@@ -139,7 +139,7 @@ const GetStarted = () => {
                     </div>
                   )
               )}
-              <Link to="home">
+              <Link to="okr-tree">
                 <button className="buttonLight" style={{ marginTop: "5vh" }}>
                   Continue
                 </button>

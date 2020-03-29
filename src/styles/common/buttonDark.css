@@ -1,5 +1,4 @@
 .buttonDark {
-  background-color: #f8f9fa;
   width: 12rem;
   padding: 0.8rem;
   background-color: #f8f9fa00;
@@ -10,6 +9,7 @@
   font-weight: 200;
   cursor: pointer;
   outline: none;
+  text-decoration: none;
 }
 
 .buttonDark:focus,

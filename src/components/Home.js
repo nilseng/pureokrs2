@@ -65,7 +65,7 @@ const Home = () => {
 
   return (
     <>
-      <NavLink to="/home">
+      <NavLink to="/okr-tree">
         <AnimatedLogo color={"#1c2e3f"} />
       </NavLink>
       <OKRModal okr={okr} setOkr={setOkr} />

@@ -5,6 +5,7 @@
   border-color: #1c2e3f;
   cursor: pointer;
   outline: none;
+  font-size: 0.7rem;
 }
 
 .buttonLink:focus,
