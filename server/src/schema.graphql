@@ -1,0 +1,49 @@
+type Query {
+  okrs: [Okr]!
+}
+
+type Mutation {
+  createOkr(objective: String!): Okr!
+}
+
+type User {
+  id: ID!
+  name: String
+  email: String!
+  okrs: [Okr]!
+}
+
+type Okr {
+  id: ID!
+  objective: String!
+  status: OkrStatus!
+  assignedTo: User!
+  createdAt: String!
+  updatedAt: String!
+  dueDate: String
+  updatedBy: User!
+  keyResults: [KeyResult]!
+}
+
+enum OkrStatus {
+  Completed
+  Active
+  Archived
+}
+
+type KeyResult {
+  id: ID!
+  name: String!
+  value: Float!
+  type: KeyResultType!
+  dueDate: String
+  createdAt: String!
+  updatedAt: String!
+  user: User!
+}
+
+enum KeyResultType {
+  Number
+  Binary
+  Percentage
+}
