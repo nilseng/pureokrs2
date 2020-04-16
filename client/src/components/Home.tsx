@@ -16,18 +16,18 @@ const myTreeData = [
         parent: "Pure Objectives and Key Results",
         keyResults: [
           { kr: "Something you can measure" },
-          { kr: "Something challenging, but possible" }
+          { kr: "Something challenging, but possible" },
         ],
         children: [
           {
             name: "Design a nice tree",
-            parent: "Build a great OKR tool"
-          }
+            parent: "Build a great OKR tool",
+          },
         ],
         attributes: {
           1: "Have x users",
-          2: "Get some kudos on product hunt"
-        }
+          2: "Get some kudos on product hunt",
+        },
       },
       {
         name: "Have fun",
@@ -35,16 +35,16 @@ const myTreeData = [
         children: [
           {
             name: "child of child",
-            parent: "Have fun"
+            parent: "Have fun",
           },
           {
             name: "second child of child",
-            parent: "Have fun"
-          }
-        ]
-      }
-    ]
-  }
+            parent: "Have fun",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 const Home = () => {
@@ -55,9 +55,9 @@ const Home = () => {
   tree.separation(function separation(a, b) {
     return a.parent === b.parent ? 1.0 : 1.4;
   });
-  const root = tree(d3.hierarchy(myTreeData[0]));
+  const root: d3.HierarchyPointNode<any> = tree(d3.hierarchy(myTreeData[0]));
   const nodes = root.descendants().reverse();
-  nodes.forEach(node => {
+  nodes.forEach((node) => {
     node.x += 50;
     node.y += 10;
   });
@@ -77,14 +77,14 @@ const Home = () => {
           position: "fixed",
           transform: "rotate(-30deg) translate(20vw, -40vh)",
           zIndex: -1,
-          borderRadius: "2rem"
+          borderRadius: "2rem",
         }}
       ></div>
       <div
         id="treeWrapper"
         style={{
           width: "100vw",
-          height: "100vh"
+          height: "100vh",
         }}
       >
         <svg
@@ -93,14 +93,14 @@ const Home = () => {
           width={"100vw"}
           viewBox={"0 0 100 100"}
         >
-          {links.map(link => (
+          {links.map((link) => (
             <path
               d={`M ${link.source.x} ${link.source.y} L ${link.target.x} ${link.target.y} `}
               stroke="#1c2e3f"
               strokeWidth="0.1"
             ></path>
           ))}
-          {nodes.map(node => (
+          {nodes.map((node) => (
             <g>
               <circle
                 cx={node.x}

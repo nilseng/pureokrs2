@@ -32,7 +32,7 @@ const Profile = () => {
                 <Card.Title>{user.name}</Card.Title>
                 {user.updated_at && (
                   <p style={{ color: "gray", fontSize: "smaller" }}>
-                    {new Date(user.updated_at).toLocaleString({})}
+                    {new Date(user.updated_at).toLocaleString()}
                   </p>
                 )}
               </Card.Body>

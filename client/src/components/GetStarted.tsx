@@ -14,26 +14,26 @@ const GetStarted = () => {
   const [keyResults, setKeyResults] = useState([""]);
   useLayoutEffect(() => {
     if (showKeyResults) {
-      document.getElementById("newKR").focus();
+      document.getElementById("newKR")?.focus();
     } else {
-      document.getElementById("objective").focus();
+      document.getElementById("objective")?.focus();
     }
   }, [showKeyResults]);
 
   const addKeyResult = () => {
-    if (!!document.getElementById("newKR").value) {
-      document.getElementById("newKR").value = "";
+    if (!!document.getElementById("newKR")) {
+      (document.getElementById("newKR") as HTMLInputElement).value = "";
       setKeyResults(["", ...keyResults]);
     }
-    document.getElementById("newKR").focus();
+    document.getElementById("newKR")?.focus();
   };
 
   const useKeyPress = () => {
     useEffect(() => {
-      const handleKeyPress = event => {
+      const handleKeyPress = (event: any) => {
         if (
           showKeyResults &&
-          !!document.getElementById("newKR").value &&
+          !!(document.getElementById("newKR") as HTMLInputElement).value &&
           event.key === "Enter"
         ) {
           addKeyResult();
@@ -66,7 +66,7 @@ const GetStarted = () => {
                 id="objective"
                 style={{ marginTop: "5vh" }}
                 placeholder="Enter Objective..."
-                onChange={e => setObjective(e.target.value)}
+                onChange={(e) => setObjective(e.target.value)}
               />
               <br />
               <button
@@ -94,10 +94,10 @@ const GetStarted = () => {
                 id="newKR"
                 style={{ marginTop: "5vh" }}
                 placeholder="Enter new Key Result..."
-                onChange={e => {
+                onChange={(e) => {
                   setKeyResults([
                     e.target.value,
-                    ...keyResults.slice(1, keyResults.length)
+                    ...keyResults.slice(1, keyResults.length),
                   ]);
                 }}
               />
@@ -112,7 +112,7 @@ const GetStarted = () => {
                     marginTop: "0.5rem",
                     padding: "0",
                     cursor: "pointer",
-                    outline: "none"
+                    outline: "none",
                   }}
                   onClick={addKeyResult}
                 >
@@ -131,8 +131,8 @@ const GetStarted = () => {
                         minHeight: "1.2rem",
                         borderRadius: "4px",
                         fontSize: "1rem",
-                        fontWeight: "200",
-                        marginTop: "0.5rem"
+                        fontWeight: 200,
+                        marginTop: "0.5rem",
                       }}
                     >
                       {kr}

@@ -3,7 +3,7 @@ import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../styles/OKRModal.css";
 
-const OKRModal = props => {
+const OKRModal = (props: any) => {
   return props.okr ? (
     <div id="OKRModal">
       <button onClick={() => props.setOkr(null)}>
@@ -12,14 +12,15 @@ const OKRModal = props => {
           style={{
             color: "#f8f9fa",
             margin: "1rem",
-            fontSize: "3rem"
+            fontSize: "3rem",
           }}
         />
       </button>
       <div style={{ textAlign: "center", color: "#f8f9fa" }}>
         <b>{props.okr.name}</b>
         <br />
-        {props.okr.keyResults && props.okr.keyResults.map(kr => <p>{kr.kr}</p>)}
+        {props.okr.keyResults &&
+          props.okr.keyResults.map((kr: any) => <p>{kr.kr}</p>)}
       </div>
     </div>
   ) : null;

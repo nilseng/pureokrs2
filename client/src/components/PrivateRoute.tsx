@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useAuth0 } from "../react-auth0-spa";
 
-const PrivateRoute = ({ component: Component, path, ...rest }) => {
+const PrivateRoute = ({ component: Component, path, ...rest }: any) => {
   const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
@@ -11,13 +11,13 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
     }
     const fn = async () => {
       await loginWithRedirect({
-        appState: { targetUrl: window.location.pathname }
+        appState: { targetUrl: window.location.pathname },
       });
     };
     fn();
   }, [loading, isAuthenticated, loginWithRedirect, path]);
 
-  const render = props =>
+  const render = (props: any) =>
     isAuthenticated === true ? <Component {...props} /> : null;
 
   return <Route path={path} render={render} {...rest} />;
