@@ -50,7 +50,7 @@ const GetStarted = () => {
   useKeyPress();
   return (
     <>
-      <NavLink to="/okr-tree">
+      <NavLink to="/okr-tree" style={{ position: "absolute" }}>
         <AnimatedLogo />
       </NavLink>
       <div className="getStartedContainer" style={{ minHeight: "100vh" }}>

@@ -9,10 +9,11 @@ import history from "../utils/history";
 import PrivateRoute from "./PrivateRoute";
 import NavBar from "./NavBar";
 import Welcome from "./Welcome";
-import Home from "./Home";
+import Home from "./OKRTree";
 import GetStarted from "./GetStarted";
 import NotFoundPage from "./NotFoundPage";
 import Profile from "./Profile";
+import OKRList from "./OKRList";
 
 function App() {
   const { loading } = useAuth0();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/getstarted" component={GetStarted} />
           <PrivateRoute path="/okr-tree" component={Home} />
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/okr-list" component={OKRList} />
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

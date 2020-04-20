@@ -1,5 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ApolloProvider } from "react-apollo";
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
 
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./react-auth0-spa";
@@ -20,6 +24,16 @@ const onRedirectCallback = (appState: any) => {
   );
 };
 
+// TODO: Configure for staging and production
+const httpLink = createHttpLink({
+  uri: "http://localhost:4000",
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH0_DOMAIN || config.domain}
@@ -27,7 +41,9 @@ ReactDOM.render(
     redirect_uri={window.location.origin}
     onRedirectCallback={onRedirectCallback}
   >
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </Auth0Provider>,
   document.getElementById("root")
 );

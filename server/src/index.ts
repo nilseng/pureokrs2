@@ -12,11 +12,13 @@ const resolvers = {
     },
     Mutation: {
         createOkr: (parent: any, args: any, context: any) => {
-            // TODO: Get userId from context instead
-            const userId = 1
             return context.prisma.okr.create({
                 data: { objective: args.objective }
             })
+        },
+        deleteOkrs: async (parent: any, args: any, context: any) => {
+            const deleted = await context.prisma.okr.deleteMany({ where: { id: { gte: 0 } } })
+            return deleted?.count
         }
     }
 };

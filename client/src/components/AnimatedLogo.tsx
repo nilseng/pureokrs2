@@ -1,16 +1,18 @@
 import React from "react";
 
-const AnimatedLogo = ({ color = "#f8f9fa" }) => {
+const AnimatedLogo = ({
+  color = "#f8f9fa",
+  height = "5rem",
+  width = "5rem",
+}) => {
   return (
     <svg
       style={{
-        position: "absolute",
-        height: "5rem",
-        width: "5rem",
-        margin: "1rem"
+        height: height,
+        width: width,
       }}
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 100 100"
+      viewBox="0 0 80 60"
     >
       <circle cx="50" cy="10" r="3" fill={color} />
       <line x1="50" x2="35" y1="10" y2="30" stroke={color} />

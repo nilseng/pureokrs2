@@ -10,7 +10,7 @@ import AnimatedLogo from "./AnimatedLogo";
 const Welcome = () => {
   return (
     <header>
-      <NavLink to="okr-tree">
+      <NavLink to="okr-tree" style={{ position: "absolute" }}>
         <AnimatedLogo />
       </NavLink>
       <div className="topBox" style={{ minHeight: "50vh" }}>

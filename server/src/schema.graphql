@@ -3,7 +3,8 @@ type Query {
 }
 
 type Mutation {
-  createOkr(objective: String!): Okr!
+  createOkr(objective: String!, children: [ID]! = []): Okr!
+  deleteOkrs: Int!
 }
 
 type User {
@@ -23,6 +24,8 @@ type Okr {
   dueDate: String
   updatedBy: User!
   keyResults: [KeyResult]!
+  parent: Okr
+  children: [Okr]!
 }
 
 enum OkrStatus {

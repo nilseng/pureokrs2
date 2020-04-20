@@ -8,38 +8,41 @@ datasource db {
 }
 
 model KeyResult {
-  createdAt DateTime  @default(now())
-  dueDate   DateTime?
-  id        Int       @default(autoincrement()) @id
-  name      String
-  okrId     Int
-  type      String    @default("Number")
-  updatedAt DateTime  @default(now())
-  updatedBy Int
-  value     Float?    @default(0)
-  Okr       Okr       @relation(fields: [okrId], references: [id])
-  User      User      @relation(fields: [updatedBy], references: [id])
+  createdAt   DateTime  @default(now())
+  dueDate     DateTime?
+  id          Int       @default(autoincrement()) @id
+  name        String
+  okrId       Int
+  type        String    @default("Number")
+  updatedAt   DateTime  @default(now())
+  updatedById Int
+  value       Float?    @default(0)
+  Okr         Okr       @relation(fields: [okrId], references: [id])
+  updatedBy        User      @relation(fields: [updatedById], references: [id])
 }
 
 model Okr {
-  assignedTo                Int?
-  createdAt                 DateTime    @default(now())
-  dueDate                   DateTime?
-  id                        Int         @default(autoincrement()) @id
-  objective                 String
-  status                    String      @default("Active")
-  updatedAt                 DateTime    @default(now())
-  updatedBy                 Int?
-  User_Okr_assignedToToUser User?       @relation("Okr_assignedToToUser", fields: [assignedTo], references: [id])
-  User_Okr_updatedByToUser  User?       @relation("Okr_updatedByToUser", fields: [updatedBy], references: [id])
-  KeyResult                 KeyResult[]
+  assignedToId                Int?
+  createdAt                   DateTime    @default(now())
+  dueDate                     DateTime?
+  id                          Int         @default(autoincrement()) @id
+  objective                   String
+  parentId                    Int?
+  status                      String      @default("Active")
+  updatedAt                   DateTime    @default(now())
+  updatedById                 Int?
+  User_Okr_assignedToIdToUser User?       @relation("Okr_assignedToIdToUser", fields: [assignedToId], references: [id])
+  parent                         Okr?        @relation("ParentToChild", fields: [parentId], references: [id])
+  User_Okr_updatedByIdToUser  User?       @relation("Okr_updatedByIdToUser", fields: [updatedById], references: [id])
+  KeyResult                   KeyResult[]
+  children                   Okr[]       @relation("ParentToChild")
 }
 
 model User {
-  email                    String      @unique
-  id                       Int         @default(autoincrement()) @id
-  name                     String?
-  KeyResult                KeyResult[]
-  Okr_Okr_assignedToToUser Okr[]       @relation("Okr_assignedToToUser")
-  Okr_Okr_updatedByToUser  Okr[]       @relation("Okr_updatedByToUser")
+  email                      String      @unique
+  id                         Int         @default(autoincrement()) @id
+  name                       String?
+  KeyResult                  KeyResult[]
+  Okr_Okr_assignedToIdToUser Okr[]       @relation("Okr_assignedToIdToUser")
+  Okr_Okr_updatedByIdToUser  Okr[]       @relation("Okr_updatedByIdToUser")
 }

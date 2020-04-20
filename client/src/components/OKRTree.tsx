@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import * as d3 from "d3";
 
-import AnimatedLogo from "./AnimatedLogo";
 import OKRModal from "./OKRModal";
-import "../styles/Home.css";
 
 const myTreeData = [
   {
@@ -65,9 +62,6 @@ const Home = () => {
 
   return (
     <>
-      <NavLink to="/okr-tree">
-        <AnimatedLogo color={"#1c2e3f"} />
-      </NavLink>
       <OKRModal okr={okr} setOkr={setOkr} />
       <div
         style={{

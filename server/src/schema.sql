@@ -11,12 +11,14 @@ CREATE TABLE "pureokrs2"."Okr" (
     objective VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL DEFAULT 'Active',
     "dueDate" TIMESTAMP,
+    "parentId" INTEGER,
+    FOREIGN KEY ("parentId") REFERENCES "pureokrs2"."Okr"(id),
     "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
     "updatedAt" TIMESTAMP NOT NULL DEFAULT now(),
-    "updatedBy" INTEGER,
-    FOREIGN KEY ("updatedBy") REFERENCES "pureokrs2"."User"(id),
-    "assignedTo" INTEGER,
-    FOREIGN KEY ("assignedTo") REFERENCES "pureokrs2"."User"(id)
+    "updatedById" INTEGER,
+    FOREIGN KEY ("updatedById") REFERENCES "pureokrs2"."User"(id),
+    "assignedToId" INTEGER,
+    FOREIGN KEY ("assignedToId") REFERENCES "pureokrs2"."User"(id)
 );
 
 CREATE TABLE "pureokrs2"."KeyResult" (
@@ -27,8 +29,8 @@ CREATE TABLE "pureokrs2"."KeyResult" (
     "dueDate" TIMESTAMP,
     "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
     "updatedAt" TIMESTAMP NOT NULL DEFAULT now(),
-    "updatedBy" INTEGER NOT NULL,
-    FOREIGN KEY ("updatedBy") REFERENCES "pureokrs2"."User"(id),
+    "updatedById" INTEGER NOT NULL,
+    FOREIGN KEY ("updatedById") REFERENCES "pureokrs2"."User"(id),
     "okrId" INTEGER NOT NULL,
     FOREIGN KEY ("okrId") REFERENCES "pureokrs2"."Okr"(id)
 );
