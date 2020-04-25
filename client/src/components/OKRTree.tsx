@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import * as d3 from "d3";
 
 import OKRModal from "./OKRModal";
@@ -60,6 +60,21 @@ const Home = () => {
   });
   const links = root.links();
 
+  const [svgTranslate, setSvgTranslate] = useState("translate(0,0) scale(1)");
+
+  useLayoutEffect(() => {
+    const svg: any = d3.select(document.getElementById("okrTree"));
+    const zoom = d3.zoom().on("zoom", zoomed);
+    svg.call(zoom);
+  });
+
+  const zoomed = () => {
+    let svgTransform = d3.event.transform;
+    setSvgTranslate(
+      `translate(${svgTransform.x},${svgTransform.y}) scale(${svgTransform.k})`
+    );
+  };
+
   return (
     <>
       <OKRModal okr={okr} setOkr={setOkr} />
@@ -83,32 +98,38 @@ const Home = () => {
       >
         <svg
           id="okrTree"
-          height={"100vh"}
-          width={"100vw"}
+          height={"100%"}
+          width={"100%"}
           viewBox={"0 0 100 100"}
         >
-          {links.map((link) => (
-            <path
-              d={`M ${link.source.x} ${link.source.y} L ${link.target.x} ${link.target.y} `}
-              stroke="#1c2e3f"
-              strokeWidth="0.1"
-            ></path>
-          ))}
-          {nodes.map((node) => (
-            <g>
-              <circle
-                cx={node.x}
-                cy={node.y}
-                r="1"
-                fill="#1c2e3f"
-                style={{ cursor: "pointer" }}
-                onClick={() => setOkr(node.data)}
-              />
-              <text x={node.x + 2} y={node.y + 0.3} style={{ fontSize: "1.5" }}>
-                {node.data.name}
-              </text>
-            </g>
-          ))}
+          <g transform={svgTranslate}>
+            {links.map((link) => (
+              <path
+                d={`M ${link.source.x} ${link.source.y} L ${link.target.x} ${link.target.y} `}
+                stroke="#1c2e3f"
+                strokeWidth="0.1"
+              ></path>
+            ))}
+            {nodes.map((node) => (
+              <g>
+                <circle
+                  cx={node.x}
+                  cy={node.y}
+                  r="1"
+                  fill="#1c2e3f"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setOkr(node.data)}
+                />
+                <text
+                  x={node.x + 2}
+                  y={node.y + 0.3}
+                  style={{ fontSize: "1.5" }}
+                >
+                  {node.data.name}
+                </text>
+              </g>
+            ))}
+          </g>
         </svg>
       </div>
     </>

@@ -18,19 +18,25 @@ const NavBar = () => {
         style={{ boxShadow: "0px 1px 5px #1c2e3f" }}
       >
         <Navbar.Brand href="/okr-tree">
-          <AnimatedLogo color={"#1c2e3f"} height={"4rem"} width={"4rem"} />
-          Pure Objectives and Key Results
+          <AnimatedLogo color={"#1c2e3f"} height={"3rem"} width={"3rem"} />
+          <span className="ml-2">Pure Objectives and Key Results</span>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          className="mb-2"
+          aria-controls="basic-navbar-nav"
+          style={{ outline: "none" }}
+        />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Item>
-              <Button variant="outline-primary" className="mr-4">
-                New OKR
-              </Button>
+            <Nav.Item className="mr-2">
+              <Button variant="outline-primary">New OKR</Button>
             </Nav.Item>
-            <Nav.Link href="/profile">Profile</Nav.Link>
-            <Nav.Link onClick={() => logout()}>Log out</Nav.Link>
+            <Nav.Link className="mr-2" href="/profile">
+              Profile
+            </Nav.Link>
+            <Nav.Link className="mr-2" onClick={() => logout()}>
+              Log out
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
