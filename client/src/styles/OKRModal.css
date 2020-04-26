@@ -1,22 +1,10 @@
-#OKRModal {
+.modal-content {
+  border: 0;
+  border-radius: 0;
+}
+
+.modal-footer {
+  border: 0;
+  border-radius: 0;
   background-color: #1c2e3f;
-  position: absolute;
-  height: calc(100vh - 20vmin);
-  width: calc(100vw - 20vmin);
-  margin: 10vmin;
-}
-
-@media screen and (max-width: 720px) {
-  #OKRModal {
-    height: calc(100vh - 2rem);
-    width: calc(100vw - 2rem);
-    margin: 1rem;
-  }
-}
-
-button {
-  background: none;
-  border-color: #1c2e3f;
-  cursor: pointer;
-  outline: none;
 }

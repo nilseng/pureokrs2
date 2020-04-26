@@ -2,6 +2,7 @@ import React, { useState, useLayoutEffect, useEffect } from "react";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 import "../styles/GetStarted.css";
 import "../styles/common/buttonLight.css";
@@ -50,8 +51,15 @@ const GetStarted = () => {
   useKeyPress();
   return (
     <>
-      <NavLink to="/okr-tree" style={{ position: "absolute" }}>
-        <AnimatedLogo />
+      <NavLink
+        to="/okr-tree"
+        style={{
+          position: "absolute",
+          paddingTop: "0.8125rem",
+          paddingLeft: "1rem",
+        }}
+      >
+        <AnimatedLogo height={"3rem"} width={"3rem"} />
       </NavLink>
       <div className="getStartedContainer" style={{ minHeight: "100vh" }}>
         <div style={{ paddingTop: "20vh" }}>
@@ -69,13 +77,14 @@ const GetStarted = () => {
                 onChange={(e) => setObjective(e.target.value)}
               />
               <br />
-              <button
+              <Button
+                size="lg"
                 className="buttonLight"
                 style={{ marginTop: "5vh" }}
                 onClick={() => setShowKeyResults(!!objective)}
               >
                 Continue
-              </button>
+              </Button>
               <br />
               <Link to="/okr-tree">
                 <button className="buttonLink">Skip</button>
@@ -103,19 +112,7 @@ const GetStarted = () => {
               />
               <br />
               <div style={{ textAlign: "left" }}>
-                <button
-                  style={{
-                    background: "none",
-                    border: "none",
-                    color: "#f8f9fa",
-                    fontSize: "2rem",
-                    marginTop: "0.5rem",
-                    padding: "0",
-                    cursor: "pointer",
-                    outline: "none",
-                  }}
-                  onClick={addKeyResult}
-                >
+                <button className="buttonPlus" onClick={addKeyResult}>
                   <FaIcon icon={faPlus} />
                 </button>
               </div>
@@ -140,9 +137,13 @@ const GetStarted = () => {
                   )
               )}
               <Link to="okr-tree">
-                <button className="buttonLight" style={{ marginTop: "5vh" }}>
+                <Button
+                  size="lg"
+                  className="buttonLight"
+                  style={{ marginTop: "5vh" }}
+                >
                   Continue
-                </button>
+                </Button>
               </Link>
             </>
           )}

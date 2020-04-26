@@ -1,20 +1,13 @@
 .buttonDark {
   width: 12rem;
-  padding: 0.8rem;
-  background-color: #f8f9fa00;
+  background-color: transparent;
   color: #1c2e3f;
   border-color: #1c2e3f;
-  border-radius: 10rem;
-  font-size: 2rem;
-  font-weight: 200;
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
 }
 
 .buttonDark:focus,
 .buttonDark:hover {
+  background-color: #f8f9fa00;
   border-color: #3c6285;
   color: #3c6285;
-  outline: none;
 }

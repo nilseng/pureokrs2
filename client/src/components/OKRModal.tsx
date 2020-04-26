@@ -1,28 +1,31 @@
 import React from "react";
-import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import "../styles/OKRModal.css";
 
 const OKRModal = (props: any) => {
+  const handleClose = () => props.setOkr(null);
   return props.okr ? (
-    <div id="OKRModal">
-      <button onClick={() => props.setOkr(null)}>
-        <FaIcon
-          icon={faTimes}
-          style={{
-            color: "#f8f9fa",
-            margin: "1rem",
-            fontSize: "3rem",
-          }}
-        />
-      </button>
-      <div style={{ textAlign: "center", color: "#f8f9fa" }}>
-        <b>{props.okr.name}</b>
-        <br />
+    <Modal
+      show={!!props.okr}
+      style={{ borderRadius: 0 }}
+      centered
+      onHide={handleClose}
+    >
+      <Modal.Header style={{ borderRadius: 0 }} closeButton>
+        <Modal.Title>{props.okr.name}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {props.okr.keyResults &&
           props.okr.keyResults.map((kr: any) => <p>{kr.kr}</p>)}
-      </div>
-    </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="outline-secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="outline-primary">Save Changes</Button>
+      </Modal.Footer>{" "}
+    </Modal>
   ) : null;
 };
 

@@ -3,7 +3,7 @@
   color: #f8f9fa;
   font-size: 2rem;
   text-align: center;
-  background-image: url("../svgs/BgThing.svg");
+  background-image: url(../svgs/BgThing.svg);
   background-repeat: no-repeat;
   background-position-y: -20vh;
   background-position-x: -10vw;
@@ -19,9 +19,20 @@ input {
   background-color: #f8f9fa;
   border: none;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 0.3rem;
   font-size: 1.5rem;
   font-weight: 200;
+  outline: none;
+}
+
+.buttonPlus {
+  background: none;
+  border: none;
+  color: #f8f9fa;
+  font-size: 2rem;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  cursor: pointer;
   outline: none;
 }
 
@@ -32,12 +43,12 @@ input {
   }
 
   input {
-    width: calc(60vw - 2rem);
+    width: calc(60vw);
   }
 }
 
 @media screen and (max-width: 720px) {
   input {
-    width: calc(100vw - 2rem);
+    width: calc(100vw);
   }
 }

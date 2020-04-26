@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 import "../styles/Welcome.css";
 import "../styles/common/buttonLight.css";
@@ -10,21 +11,36 @@ import AnimatedLogo from "./AnimatedLogo";
 const Welcome = () => {
   return (
     <header>
-      <NavLink to="okr-tree" style={{ position: "absolute" }}>
-        <AnimatedLogo />
+      <NavLink
+        to="okr-tree"
+        style={{
+          position: "absolute",
+          paddingTop: "0.8125rem",
+          paddingLeft: "1rem",
+        }}
+      >
+        <AnimatedLogo height={"3rem"} width={"3rem"} />
       </NavLink>
       <div className="topBox" style={{ minHeight: "50vh" }}>
         <Link style={{ outline: "none" }} to="getstarted">
-          <button className="buttonLight" style={{ marginTop: "20vh" }}>
+          <Button
+            size="lg"
+            className="buttonLight"
+            style={{ marginTop: "20vh" }}
+          >
             Get started
-          </button>
+          </Button>
         </Link>
       </div>
       <div className="bottomBox" style={{ minHeight: "50vh" }}>
         <Link to="okr-tree">
-          <button className="buttonDark" style={{ marginTop: "15vh" }}>
+          <Button
+            size="lg"
+            className="buttonDark"
+            style={{ marginTop: "15vh" }}
+          >
             Login
-          </button>
+          </Button>
         </Link>
       </div>
     </header>
