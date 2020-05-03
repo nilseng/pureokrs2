@@ -26,7 +26,10 @@ const onRedirectCallback = (appState: any) => {
 
 // TODO: Configure for staging and production
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://pureokrs2-staging.herokuapp.com/api"
+      : "http://localhost:4000/api",
 });
 
 const client = new ApolloClient({

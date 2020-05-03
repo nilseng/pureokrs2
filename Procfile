@@ -1,1 +1,1 @@
-web serve -s client/build
+web npx ts-node server/src/index.ts

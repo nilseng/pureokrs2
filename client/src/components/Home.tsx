@@ -26,8 +26,8 @@ const Home = () => {
   return (
     <>
       <OKRModal okr={okr} setOkr={setOkr} />
-
-      {error && <div>Something went wrong: {error}</div>}
+      {loading && <Loading />}
+      {error && <div>Something went wrong...</div>}
       {data && <OKRTree okrs={data.okrs} setOkr={setOkr} />}
     </>
   );
