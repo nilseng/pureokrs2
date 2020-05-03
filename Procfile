@@ -1,1 +1,1 @@
-web npx ts-node server/src/index.ts
+web ts-node server/src/index.ts
