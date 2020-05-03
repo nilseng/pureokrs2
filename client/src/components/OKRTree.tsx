@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from "react";
 import * as d3 from "d3";
 
-const OkrTree = (props: any) => {
+const OKRTree = (props: any) => {
   props.okrs.map((okr: any) => (okr.name = okr.objective));
   const rootOkr = { id: "root", name: "Your OKRs", children: props.okrs };
   const tree = d3.tree();
@@ -94,4 +94,4 @@ const OkrTree = (props: any) => {
   );
 };
 
-export default OkrTree;
+export default OKRTree;

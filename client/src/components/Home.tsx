@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
 
+import OKRTree from "./OKRTree";
 import OKRModal from "./OKRModal";
 import Loading from "./Loading";
-import OkrTree from "./OkrTree";
 
 const OKR_QUERY = gql`
   {
@@ -28,7 +28,7 @@ const Home = () => {
       <OKRModal okr={okr} setOkr={setOkr} />
       {loading && <Loading />}
       {error && <div>error</div>}
-      {data && <OkrTree okrs={data.okrs} setOkr={setOkr} />}
+      {data && <OKRTree okrs={data.okrs} setOkr={setOkr} />}
     </>
   );
 };
