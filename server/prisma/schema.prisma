@@ -7,7 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Company {
+  id        Int         @default(autoincrement()) @id
+  name      String
+  KeyResult KeyResult[]
+  Okr       Okr[]
+  User      User[]
+}
+
 model KeyResult {
+  companyId   Int
   createdAt   DateTime  @default(now())
   dueDate     DateTime?
   id          Int       @default(autoincrement()) @id
@@ -17,12 +26,14 @@ model KeyResult {
   updatedAt   DateTime  @default(now())
   updatedById Int
   value       Float?    @default(0)
+  Company     Company   @relation(fields: [companyId], references: [id])
   Okr         Okr       @relation(fields: [okrId], references: [id])
-  updatedBy        User      @relation(fields: [updatedById], references: [id])
+  User        User      @relation(fields: [updatedById], references: [id])
 }
 
 model Okr {
   assignedToId                Int?
+  companyId                   Int
   createdAt                   DateTime    @default(now())
   dueDate                     DateTime?
   id                          Int         @default(autoincrement()) @id
@@ -32,16 +43,19 @@ model Okr {
   updatedAt                   DateTime    @default(now())
   updatedById                 Int?
   User_Okr_assignedToIdToUser User?       @relation("Okr_assignedToIdToUser", fields: [assignedToId], references: [id])
-  parent                         Okr?        @relation("ParentToChild", fields: [parentId], references: [id])
+  Company                     Company     @relation(fields: [companyId], references: [id])
+  Okr                         Okr?        @relation("OkrToOkr_parentId", fields: [parentId], references: [id])
   User_Okr_updatedByIdToUser  User?       @relation("Okr_updatedByIdToUser", fields: [updatedById], references: [id])
   KeyResult                   KeyResult[]
-  children                   Okr[]       @relation("ParentToChild")
+  other_Okr                   Okr[]       @relation("OkrToOkr_parentId")
 }
 
 model User {
+  companyId                  Int
   email                      String      @unique
   id                         Int         @default(autoincrement()) @id
   name                       String?
+  Company                    Company     @relation(fields: [companyId], references: [id])
   KeyResult                  KeyResult[]
   Okr_Okr_assignedToIdToUser Okr[]       @relation("Okr_assignedToIdToUser")
   Okr_Okr_updatedByIdToUser  Okr[]       @relation("Okr_updatedByIdToUser")

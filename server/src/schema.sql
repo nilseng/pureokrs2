@@ -1,9 +1,16 @@
 CREATE SCHEMA "pureokrs2";
 
+CREATE TABLE "pureokrs2"."Company" (
+    id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE "pureokrs2"."User" (
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255),
-    email VARCHAR(255) UNIQUE NOT NULL
+    email VARCHAR(255) UNIQUE NOT NULL,
+    "companyId" INTEGER NOT NULL,
+    FOREIGN KEY ("companyId") REFERENCES "pureokrs2"."Company"(id)
 );
 
 CREATE TABLE "pureokrs2"."Okr" (
@@ -18,7 +25,9 @@ CREATE TABLE "pureokrs2"."Okr" (
     "updatedById" INTEGER,
     FOREIGN KEY ("updatedById") REFERENCES "pureokrs2"."User"(id),
     "assignedToId" INTEGER,
-    FOREIGN KEY ("assignedToId") REFERENCES "pureokrs2"."User"(id)
+    FOREIGN KEY ("assignedToId") REFERENCES "pureokrs2"."User"(id),
+    "companyId" INTEGER NOT NULL,
+    FOREIGN KEY ("companyId") REFERENCES "pureokrs2"."Company"(id)
 );
 
 CREATE TABLE "pureokrs2"."KeyResult" (
@@ -32,7 +41,9 @@ CREATE TABLE "pureokrs2"."KeyResult" (
     "updatedById" INTEGER NOT NULL,
     FOREIGN KEY ("updatedById") REFERENCES "pureokrs2"."User"(id),
     "okrId" INTEGER NOT NULL,
-    FOREIGN KEY ("okrId") REFERENCES "pureokrs2"."Okr"(id)
+    FOREIGN KEY ("okrId") REFERENCES "pureokrs2"."Okr"(id),
+    "companyId" INTEGER NOT NULL,
+    FOREIGN KEY ("companyId") REFERENCES "pureokrs2"."Company"(id)
 );
 
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()

@@ -9,18 +9,13 @@ import history from "../utils/history";
 import PrivateRoute from "./PrivateRoute";
 import NavBar from "./NavBar";
 import Welcome from "./Welcome";
-import Home from "./OKRTree";
+import Home from "./Home";
 import GetStarted from "./GetStarted";
 import NotFoundPage from "./NotFoundPage";
 import Profile from "./Profile";
 import OKRList from "./OKRList";
 
 function App() {
-  const { loading } = useAuth0();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
   return (
     <div className="App">
       <Router history={history}>

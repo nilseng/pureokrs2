@@ -1,58 +1,16 @@
 import React, { useState, useLayoutEffect } from "react";
 import * as d3 from "d3";
 
-import OKRModal from "./OKRModal";
-
-const myTreeData = [
-  {
-    name: "Pure Objectives and Key Results",
-    attributes: {},
-    children: [
-      {
-        name: "Build a great OKR tool",
-        parent: "Pure Objectives and Key Results",
-        keyResults: [
-          { kr: "Something you can measure" },
-          { kr: "Something challenging, but possible" },
-        ],
-        children: [
-          {
-            name: "Design a nice tree",
-            parent: "Build a great OKR tool",
-          },
-        ],
-        attributes: {
-          1: "Have x users",
-          2: "Get some kudos on product hunt",
-        },
-      },
-      {
-        name: "Have fun",
-        parent: "Pure Objectives and Key Results",
-        children: [
-          {
-            name: "child of child",
-            parent: "Have fun",
-          },
-          {
-            name: "second child of child",
-            parent: "Have fun",
-          },
-        ],
-      },
-    ],
-  },
-];
-
-const Home = () => {
-  const [okr, setOkr] = useState();
+const OkrTree = (props: any) => {
+  props.okrs.map((okr: any) => (okr.name = okr.objective));
+  const rootOkr = { id: "root", name: "Your OKRs", children: props.okrs };
   const tree = d3.tree();
   tree.size([100, 100]);
   tree.nodeSize([20, 12]);
   tree.separation(function separation(a, b) {
     return a.parent === b.parent ? 1.0 : 1.4;
   });
-  const root: d3.HierarchyPointNode<any> = tree(d3.hierarchy(myTreeData[0]));
+  const root: d3.HierarchyPointNode<any> = tree(d3.hierarchy(rootOkr));
   const nodes = root.descendants().reverse();
   nodes.forEach((node) => {
     node.x += 50;
@@ -77,7 +35,6 @@ const Home = () => {
 
   return (
     <>
-      <OKRModal okr={okr} setOkr={setOkr} />
       <div
         style={{
           height: "100vh",
@@ -105,20 +62,21 @@ const Home = () => {
           <g transform={svgTranslate}>
             {links.map((link) => (
               <path
+                key={`${link.source.data.id}-${link.target.data.id}`}
                 d={`M ${link.source.x} ${link.source.y} L ${link.target.x} ${link.target.y} `}
                 stroke="#1c2e3f"
                 strokeWidth="0.1"
               ></path>
             ))}
             {nodes.map((node) => (
-              <g>
+              <g key={node.data.id}>
                 <circle
                   cx={node.x}
                   cy={node.y}
                   r="1"
                   fill="#1c2e3f"
                   style={{ cursor: "pointer" }}
-                  onClick={() => setOkr(node.data)}
+                  onClick={() => props.setOkr(node.data)}
                 />
                 <text
                   x={node.x + 2}
@@ -136,4 +94,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default OkrTree;
