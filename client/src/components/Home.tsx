@@ -3,8 +3,8 @@ import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
 
 import OKRModal from "./OKRModal";
-import OkrTree from "./OkrTree";
 import Loading from "./Loading";
+import OkrTree from "./OkrTree";
 
 const OKR_QUERY = gql`
   {
