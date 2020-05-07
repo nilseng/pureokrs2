@@ -1,1 +1,1 @@
-web npx ts-node server/src/index.ts
+web cd server && npx ts-node src/index.ts
