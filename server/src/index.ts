@@ -66,4 +66,4 @@ server.express.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/build', 'index.html'))
 });
 
-server.start(({ port: process.env.PORT || 4000, endpoint: 'api', playground: 'playground' }), ({ port }) => console.log(`The server is now running on port ${port}`));
+server.start(({ port: process.env.PORT || 4000, endpoint: '/api', playground: '/playground' }), ({ port }) => console.log(`The server is now running on port ${port}`));
