@@ -23,6 +23,8 @@ const Home = () => {
 
   const { loading, error, data } = useQuery(OKR_QUERY);
 
+  if (error) console.log(error);
+
   return (
     <>
       <OKRModal okr={okr} setOkr={setOkr} />
