@@ -1,36 +1,34 @@
-CREATE SCHEMA "pureokrs2";
-
-CREATE TABLE "pureokrs2"."Company" (
+CREATE TABLE "Company" (
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE "pureokrs2"."User" (
+CREATE TABLE "User" (
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255),
     email VARCHAR(255) UNIQUE NOT NULL,
     "companyId" INTEGER NOT NULL,
-    FOREIGN KEY ("companyId") REFERENCES "pureokrs2"."Company"(id)
+    FOREIGN KEY ("companyId") REFERENCES "Company"(id)
 );
 
-CREATE TABLE "pureokrs2"."Okr" (
+CREATE TABLE "Okr" (
     id SERIAL PRIMARY KEY NOT NULL,
     objective VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL DEFAULT 'Active',
     "dueDate" TIMESTAMP,
     "parentId" INTEGER,
-    FOREIGN KEY ("parentId") REFERENCES "pureokrs2"."Okr"(id),
+    FOREIGN KEY ("parentId") REFERENCES "Okr"(id),
     "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
     "updatedAt" TIMESTAMP NOT NULL DEFAULT now(),
     "updatedById" INTEGER,
-    FOREIGN KEY ("updatedById") REFERENCES "pureokrs2"."User"(id),
+    FOREIGN KEY ("updatedById") REFERENCES "User"(id),
     "assignedToId" INTEGER,
-    FOREIGN KEY ("assignedToId") REFERENCES "pureokrs2"."User"(id),
+    FOREIGN KEY ("assignedToId") REFERENCES "User"(id),
     "companyId" INTEGER NOT NULL,
-    FOREIGN KEY ("companyId") REFERENCES "pureokrs2"."Company"(id)
+    FOREIGN KEY ("companyId") REFERENCES "Company"(id)
 );
 
-CREATE TABLE "pureokrs2"."KeyResult" (
+CREATE TABLE "KeyResult" (
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
     value REAL DEFAULT 0,
@@ -39,11 +37,11 @@ CREATE TABLE "pureokrs2"."KeyResult" (
     "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
     "updatedAt" TIMESTAMP NOT NULL DEFAULT now(),
     "updatedById" INTEGER NOT NULL,
-    FOREIGN KEY ("updatedById") REFERENCES "pureokrs2"."User"(id),
+    FOREIGN KEY ("updatedById") REFERENCES "User"(id),
     "okrId" INTEGER NOT NULL,
-    FOREIGN KEY ("okrId") REFERENCES "pureokrs2"."Okr"(id),
+    FOREIGN KEY ("okrId") REFERENCES "Okr"(id),
     "companyId" INTEGER NOT NULL,
-    FOREIGN KEY ("companyId") REFERENCES "pureokrs2"."Company"(id)
+    FOREIGN KEY ("companyId") REFERENCES "Company"(id)
 );
 
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
@@ -55,11 +53,11 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER set_timestamp
-BEFORE UPDATE ON "pureokrs2"."Okr"
+BEFORE UPDATE ON "Okr"
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
 CREATE TRIGGER set_timestamp
-BEFORE UPDATE ON "pureokrs2"."KeyResult"
+BEFORE UPDATE ON "KeyResult"
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
