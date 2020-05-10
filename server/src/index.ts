@@ -60,6 +60,8 @@ const server = new GraphQLServer({
     }
 })
 
+console.log('testing')
+
 prisma.raw`SELECT * FROM "Okr"`.then(res => console.log(res))
 
 server.express.use(express.static(path.join(__dirname, '../../client/build')))
