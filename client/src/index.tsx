@@ -28,7 +28,7 @@ const onRedirectCallback = (appState: any) => {
 const httpLink = createHttpLink({
   uri:
     process.env.NODE_ENV === "production"
-      ? "https://pureokrs2-staging.herokuapp.com/api"
+      ? "https://pureokrs2-staging.herokuapp.com"
       : "http://localhost:4000/api",
 });
 
