@@ -62,8 +62,8 @@ const server = new GraphQLServer({
 
 server.express.use(express.static(path.join(__dirname, '../../client/build')))
 
-server.start(({ port: process.env.PORT || 4000, playground: '/playground', endpoint: '/graphql' }), ({ port }) => console.log(`The server is now running on port ${port}`));
-
 server.express.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/build', 'index.html'))
 });
+
+server.start(({ port: process.env.PORT || 4000, playground: '/playground', endpoint: '/graphql' }), ({ port }) => console.log(`The server is now running on port ${port}`));
