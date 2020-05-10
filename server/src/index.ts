@@ -60,12 +60,14 @@ const server = new GraphQLServer({
     }
 })
 
-console.log('testing')
+prisma.connect().then(_ => {
+    server.start(({ port: process.env.PORT || 4000, playground: '/playground', endpoint: '/graphql' }), ({ port }) => console.log(`The server is now running on port ${port}`));
+})
 
 prisma.raw`SELECT * FROM "Okr"`.then(res => console.log(res))
 
 server.express.use(express.static(path.join(__dirname, '../../client/build')))
 
-server.start(({ port: process.env.PORT || 4000, playground: '/playground', endpoint: '/graphql' }), ({ port }) => console.log(`The server is now running on port ${port}`));
+
 
 server.express.use('/*', express.static(path.join(__dirname, '../../client/build', 'index.html')));
