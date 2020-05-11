@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import express from "express";
 import path from 'path';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ forceTransactions: true });
 
 const resolvers = {
     Query: {
