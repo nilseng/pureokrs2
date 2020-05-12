@@ -9,11 +9,8 @@ import Loading from "./Loading";
 const OKR_QUERY = gql`
   {
     okrs {
-      id
+      _id
       objective
-      company {
-        name
-      }
     }
   }
 `;

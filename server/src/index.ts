@@ -1,7 +1,9 @@
 import { GraphQLServer } from 'graphql-yoga'
-import { PrismaClient } from "@prisma/client";
-import express from "express";
-import path from 'path';
+import { PrismaClient } from "@prisma/client"
+import express from "express"
+import path from 'path'
+import connectToMongoDb from '../database/database_setup'
+import { MongoClient, Collection } from 'mongodb'
 
 const prisma = new PrismaClient({ forceTransactions: true });
 
@@ -12,7 +14,8 @@ const resolvers = {
             return companies
         },
         okrs: async (parent: any, args: any, context: any) => {
-            const okrs = await context.prisma.okr.findMany()
+            const okrs = await okrCollection.find({}).toArray()
+            console.log(okrs)
             return okrs
         }
     },
@@ -62,6 +65,10 @@ const server = new GraphQLServer({
 
 server.express.use(express.static(path.join(__dirname, '../../client/build')))
 
-server.start(({ port: process.env.PORT || 4000, playground: '/playground', endpoint: '/graphql' }), ({ port }) => console.log(`The server is now running on port ${port}`));
+//Establishing database connection
+let okrCollection: Collection
+connectToMongoDb().then(res => okrCollection = res)
 
-server.express.use('/*', express.static(path.join(__dirname, '../../client/build', 'index.html')));
+server.start(({ port: process.env.PORT || 4000, playground: '/playground', endpoint: '/graphql' }), ({ port }) => console.log(`The server is now running on port ${port}`))
+
+server.express.use('/*', express.static(path.join(__dirname, '../../client/build', 'index.html')))

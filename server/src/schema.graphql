@@ -24,7 +24,7 @@ type User {
 }
 
 type Okr {
-  id: ID!
+  _id: ID!
   objective: String!
   status: OkrStatus!
   assignedTo: User!
