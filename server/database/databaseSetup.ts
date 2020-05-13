@@ -10,6 +10,8 @@ const connectToMongoDb = async () => {
     console.log(`Mongoclient connected to database server:${client.isConnected()}`)
 
     const okrs: Collection = client.db().collection('okrs')
+    const users: Collection = client.db().collection('users')
+    const keyResults: Collection = client.db().collection('keyResults')
 
     //Connection events
     client.on('connected', () => {
@@ -44,7 +46,7 @@ const connectToMongoDb = async () => {
         });
     });
 
-    return okrs
+    return [okrs, keyResults, users]
 }
 
 export default connectToMongoDb

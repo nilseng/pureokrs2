@@ -1,10 +1,9 @@
 {
   "scripts": {
     "heroku-prebuild": "npm i && cd client && npm i && npm run build",
-    "heroku-postbuild": "cd server && npm i && npx prisma generate"
+    "heroku-postbuild": "cd server && npm i"
   },
   "dependencies": {
-    "@prisma/cli": "^2.0.0-beta.1",
     "typescript": "^3.8.3"
   }
 }

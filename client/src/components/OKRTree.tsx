@@ -3,7 +3,7 @@ import * as d3 from "d3";
 
 const OKRTree = (props: any) => {
   props.okrs.map((okr: any) => (okr.name = okr.objective));
-  const rootOkr = { id: "root", name: "Your OKRs", children: props.okrs };
+  const rootOkr = { _id: "root", name: "Your OKRs", children: props.okrs };
   const tree = d3.tree();
   tree.size([100, 100]);
   tree.nodeSize([20, 12]);
@@ -62,14 +62,14 @@ const OKRTree = (props: any) => {
           <g transform={svgTranslate}>
             {links.map((link) => (
               <path
-                key={`${link.source.data.id}-${link.target.data.id}`}
+                key={`${link.source.data._id}-${link.target.data._id}`}
                 d={`M ${link.source.x} ${link.source.y} L ${link.target.x} ${link.target.y} `}
                 stroke="#1c2e3f"
                 strokeWidth="0.1"
               ></path>
             ))}
             {nodes.map((node) => (
-              <g key={node.data.id}>
+              <g key={node.data._id}>
                 <circle
                   cx={node.x}
                   cy={node.y}

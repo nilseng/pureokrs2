@@ -1,53 +1,64 @@
 import { GraphQLServer } from 'graphql-yoga'
-import { PrismaClient } from "@prisma/client"
 import express from "express"
 import path from 'path'
-import connectToMongoDb from '../database/database_setup'
-import { MongoClient, Collection } from 'mongodb'
-
-const prisma = new PrismaClient({ forceTransactions: true });
+import connectToMongoDb from '../database/databaseSetup'
+import { Collection, ObjectID, ObjectId } from 'mongodb'
 
 const resolvers = {
     Query: {
-        companies: async (parent: any, args: any, context: any) => {
-            const companies = await context.prisma.company.findMany()
-            return companies
-        },
-        okrs: async (parent: any, args: any, context: any) => {
+        okrs: async () => {
             const okrs = await okrCollection.find({}).toArray()
             console.log(okrs)
             return okrs
+        },
+        okrCount: async () => {
+            const count = await okrCollection.countDocuments()
+            return count
+        },
+        keyResults: async () => {
+            const keyResults = await keyResultCollection.find({}).toArray()
+            return keyResults
+        },
+        companies: async () => {
+            const companies = await userCollection.distinct('company')
+            return companies
+        },
+        companyCount: async () => {
+            const companies = await userCollection.distinct('company')
+            return companies.length
         }
     },
     Mutation: {
-        createCompany: (parent: any, args: any, context: any) => {
-            return context.prisma.company.create({
-                data: { name: args.name }
-            })
+        createOkr: async (parent: any, args: any) => {
+            const res = await okrCollection.insertOne(args)
+            return res.ops[0]
         },
-        createOkr: (parent: any, args: any, context: any) => {
-            return context.prisma.okr.create({
-                data: {
-                    objective: args.objective,
-                    Company: {
-                        connect: { id: args.companyId }
-                    }
-                }
-            })
+        deleteOkrs: async () => {
+            const deleted = await okrCollection.deleteMany({})
+            return deleted.deletedCount
         },
-        deleteOkrs: async (parent: any, args: any, context: any) => {
-            const deleted = await context.prisma.okr.deleteMany({ where: { id: { gte: 0 } } })
-            return deleted?.count
+        deleteOkr: async (parent: any, args: any) => {
+            const deleted = await okrCollection.deleteOne({ _id: new ObjectID(args._id) })
+            return deleted.deletedCount ? args._id : null
+        },
+        createKeyResult: async (parent: any, args: any) => {
+            const kr = args
+            kr.okrId = new ObjectID(kr.okrId)
+            const now = Date.now()
+            kr.createdAt = now
+            kr.updatedAt = now
+            const res = await keyResultCollection.insertOne(kr)
+            return res.ops[0]
+        },
+        deleteKeyResults: async () => {
+            const deleted = await keyResultCollection.deleteMany({})
+            return deleted.deletedCount
         }
     },
     Okr: {
-        company: async (parent: any) => {
-            const company = await prisma.company.findOne({
-                where: {
-                    id: parent.companyId
-                }
-            })
-            return company
+        keyResults: async (parent: any) => {
+            const keyResults = await keyResultCollection.find({ okrId: new ObjectId(parent._id) }).toArray()
+            return keyResults
         }
     }
 };
@@ -55,20 +66,20 @@ const resolvers = {
 const server = new GraphQLServer({
     typeDefs: './src/schema.graphql',
     resolvers,
-    context: request => {
-        return {
-            ...request,
-            prisma
-        }
-    }
 })
 
 server.express.use(express.static(path.join(__dirname, '../../client/build')))
 
 //Establishing database connection
-let okrCollection: Collection
-connectToMongoDb().then(res => okrCollection = res)
+let okrCollection: Collection, keyResultCollection: Collection, userCollection: Collection
+connectToMongoDb().then(res => {
+    [okrCollection, keyResultCollection, userCollection] = res
+})
 
-server.start(({ port: process.env.PORT || 4000, playground: '/playground', endpoint: '/graphql' }), ({ port }) => console.log(`The server is now running on port ${port}`))
+const options = {
+    port: process.env.PORT || 4000, playground: '/playground', endpoint: '/graphql'
+}
 
-server.express.use('/*', express.static(path.join(__dirname, '../../client/build', 'index.html')))
+server.start(options, ({ port }) => console.log(`The server is now running on port ${port}`))
+
+// server.express.use('/*', express.static(path.join(__dirname, '../../client/build', 'index.html')))

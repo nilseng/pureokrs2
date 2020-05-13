@@ -5,6 +5,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+
 import "../styles/OKRModal.scss";
 
 const OKRModal = (props: any) => {
@@ -24,21 +25,20 @@ const OKRModal = (props: any) => {
       <Modal.Header style={{ borderRadius: 0 }} closeButton>
         <Modal.Title>
           {!editObjective && (
-            <div id="objective" onClick={() => setEditObjective(true)}>
-              {props.okr.name}
+            <div className="objective" onClick={() => setEditObjective(true)}>
+              {props.okr.objective}
             </div>
           )}
           {editObjective && (
             <InputGroup>
               <FormControl
-                id="objectiveInput"
-                value={props.okr.name}
+                value={props.okr.objective}
                 onChange={(e: any) => {
                   e.persist();
                   props.setOkr((prevOkr: any) => {
                     return {
                       ...prevOkr,
-                      name: e.target.value,
+                      objective: e.target.value,
                     };
                   });
                 }}
@@ -57,8 +57,19 @@ const OKRModal = (props: any) => {
       </Modal.Header>
       <Modal.Body>
         {props.okr.keyResults &&
-          props.okr.keyResults.map((kr: any) => <p>{kr.kr}</p>)}
+          props.okr.keyResults.map((kr: any) => (
+            <p key={kr._id}>{kr.keyResult}</p>
+          ))}
       </Modal.Body>
+      <Modal.Footer>
+        <Button
+          className="deleteButton"
+          variant="outline-danger"
+          onClick={() => props.handleDeleteOkr(props.okr)}
+        >
+          Delete OKR
+        </Button>
+      </Modal.Footer>
     </Modal>
   ) : null;
 };

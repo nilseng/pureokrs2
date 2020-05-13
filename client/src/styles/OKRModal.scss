@@ -7,8 +7,12 @@
   border-radius: 0;
 }
 
-#objective {
+.objective {
   width: 100%;
   min-height: 1.5rem;
   cursor: pointer;
+}
+
+.deleteButton {
+  border: 0;
 }

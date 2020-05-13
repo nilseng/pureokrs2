@@ -1,0 +1,26 @@
+.aboutContainer {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  flex-direction: column;
+}
+
+.stat {
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  text-align: center;
+  border: 0.1rem solid #1c2e3f;
+  border-radius: 1rem;
+  color: #1c2e3f;
+  word-wrap: normal;
+  font-size: 1rem;
+
+  .fact {
+    font-size: 5rem;
+  }
+}

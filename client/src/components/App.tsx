@@ -13,6 +13,7 @@ import GetStarted from "./GetStarted";
 import NotFoundPage from "./NotFoundPage";
 import Profile from "./Profile";
 import OKRList from "./OKRList";
+import About from "./About";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Switch>
           <Route path="/" component={Welcome} exact />
           <Route path="/getstarted" component={GetStarted} />
+          <Route path="/about" component={About} />
           <PrivateRoute path="/okr-tree" component={Home} />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/okr-list" component={OKRList} />
