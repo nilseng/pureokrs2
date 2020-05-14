@@ -26,8 +26,7 @@ const DELETE_OKR = gql`
   }
 `;
 
-const Home = () => {
-  const [okr, setOkr] = useState<any | null>();
+const Home = (props: any) => {
   const [deleteOkr] = useMutation(DELETE_OKR, {
     update(cache, { data: { deleteOkr } }) {
       const { okrs } = cache.readQuery({ query: GET_OKRS }) as { okrs: any[] };
@@ -39,7 +38,7 @@ const Home = () => {
   });
 
   const handleDeleteOkr = (okr: any) => {
-    setOkr(null);
+    props.setOkr(null);
     deleteOkr({ variables: { _id: okr._id } });
   };
 
@@ -49,10 +48,14 @@ const Home = () => {
 
   return (
     <>
-      <OKRModal okr={okr} setOkr={setOkr} handleDeleteOkr={handleDeleteOkr} />
+      <OKRModal
+        okr={props.okr}
+        setOkr={props.setOkr}
+        handleDeleteOkr={handleDeleteOkr}
+      />
       {loading && <Loading />}
       {error && <div>Something went wrong...</div>}
-      {data && <OKRTree okrs={data.okrs} setOkr={setOkr} />}
+      {data && <OKRTree okrs={data.okrs} setOkr={props.setOkr} />}
     </>
   );
 };

@@ -39,7 +39,7 @@ const Welcome = () => {
             className="buttonDark"
             style={{ marginTop: "15vh" }}
           >
-            Login
+            Log In
           </Button>
         </Link>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route, Router } from "react-router-dom";
 
 import "../styles/App.css";
@@ -16,17 +16,23 @@ import OKRList from "./OKRList";
 import About from "./About";
 
 function App() {
+  const [okr, setOkr] = useState<any | null>();
   return (
     <div className="App">
       <Router history={history}>
         <header>
-          <NavBar />
+          <NavBar setOkr={setOkr} />
         </header>
         <Switch>
           <Route path="/" component={Welcome} exact />
           <Route path="/getstarted" component={GetStarted} />
           <Route path="/about" component={About} />
-          <PrivateRoute path="/okr-tree" component={Home} />
+          <PrivateRoute
+            path="/okr-tree"
+            component={Home}
+            okr={okr}
+            setOkr={setOkr}
+          />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/okr-list" component={OKRList} />
           <Route component={NotFoundPage} />

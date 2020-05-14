@@ -17,10 +17,11 @@ const PrivateRoute = ({ component: Component, path, ...rest }: any) => {
     fn();
   }, [loading, isAuthenticated, loginWithRedirect, path]);
 
-  const render = (props: any) =>
-    isAuthenticated === true ? <Component {...props} /> : null;
+  const render = (props: any) => {
+    return isAuthenticated === true ? <Component {...props} {...rest} /> : null;
+  };
 
-  return <Route path={path} render={render} {...rest} />;
+  return <Route path={path} render={render} />;
 };
 
 export default PrivateRoute;
