@@ -2,13 +2,15 @@ type Query {
   okrs: [Okr]!
   okrCount: Int!
   keyResults: [KeyResult]!
+  keyResultsCount: Int!
   company(id: ID!): String
   companyCount: Int!
   companies: [String]!
 }
 
 type Mutation {
-  createOkr(objective: String!, children: [ID]! = [], company: String!): Okr!
+  createOkr(objective: String, children: [ID]! = []): Okr
+  updateOkr(_id: ID!, objective: String!, children: [ID]! = []): Okr
   deleteOkrs: Int
   deleteOkr(_id: ID!): ID
   createKeyResult(

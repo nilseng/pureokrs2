@@ -6,14 +6,16 @@ import Loading from "./Loading";
 
 import "../styles/About.scss";
 
-const COMPANY_COUNT_QUERY = gql`
+const COUNT_QUERY = gql`
   {
     companyCount
+    okrCount
+    keyResultsCount
   }
 `;
 
 const About = () => {
-  const { loading, error, data } = useQuery(COMPANY_COUNT_QUERY);
+  const { loading, error, data } = useQuery(COUNT_QUERY);
 
   if (error) console.log(error);
 
@@ -26,6 +28,14 @@ const About = () => {
           <div className="stat">
             <div className="fact">{data.companyCount}</div>
             <div>Companies are registered at PureOKRs</div>
+          </div>
+          <div className="stat">
+            <div className="fact">{data.okrCount}</div>
+            <div>OKRs are created at PureOKRs</div>
+          </div>
+          <div className="stat">
+            <div className="fact">{data.keyResultsCount}</div>
+            <div>Key Results are being tracked at PureOKRs</div>
           </div>
         </div>
       )}

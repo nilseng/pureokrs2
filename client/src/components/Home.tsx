@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useQuery } from "react-apollo";
+import React from "react";
+import { useQuery, useMutation } from "react-apollo";
 import gql from "graphql-tag";
-import { useMutation } from "react-apollo";
 
 import OKRTree from "./OKRTree";
 import OKRModal from "./OKRModal";
@@ -12,10 +11,7 @@ const GET_OKRS = gql`
     okrs {
       _id
       objective
-      keyResults {
-        _id
-        keyResult
-      }
+      company
     }
   }
 `;
@@ -26,7 +22,31 @@ const DELETE_OKR = gql`
   }
 `;
 
+const UPDATE_OKR = gql`
+  mutation UpdateOkr($_id: ID!, $objective: String!) {
+    updateOkr(_id: $_id, objective: $objective) {
+      _id
+      objective
+      createdAt
+      company
+    }
+  }
+`;
+
 const Home = (props: any) => {
+  const [updateOkr] = useMutation(UPDATE_OKR, {
+    update(cache, { data: { updateOkr } }) {
+      const { okrs } = cache.readQuery({ query: GET_OKRS }) as { okrs: any[] };
+      okrs
+        .filter((okr) => okr._id === updateOkr._id)
+        .map((okr) => (okr = updateOkr));
+      cache.writeQuery({
+        query: GET_OKRS,
+        data: { okrs: okrs },
+      });
+    },
+  });
+
   const [deleteOkr] = useMutation(DELETE_OKR, {
     update(cache, { data: { deleteOkr } }) {
       const { okrs } = cache.readQuery({ query: GET_OKRS }) as { okrs: any[] };
@@ -39,6 +59,7 @@ const Home = (props: any) => {
 
   const handleDeleteOkr = (okr: any) => {
     props.setOkr(null);
+    if (!okr._id) return;
     deleteOkr({ variables: { _id: okr._id } });
   };
 
@@ -52,6 +73,9 @@ const Home = (props: any) => {
         okr={props.okr}
         setOkr={props.setOkr}
         handleDeleteOkr={handleDeleteOkr}
+        editObjective={props.editObjective}
+        setEditObjective={props.setEditObjective}
+        updateOkr={updateOkr}
       />
       {loading && <Loading />}
       {error && <div>Something went wrong...</div>}

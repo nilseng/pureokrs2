@@ -1,0 +1,14 @@
+.rotatedRectBackground {
+  height: 100vh;
+  width: 200vw;
+  background-color: #f8f9fa;
+  position: fixed;
+  transform: rotate(-30deg) translate(20vw, -40vh);
+  z-index: -1;
+  border-radius: 2rem;
+}
+
+#treeWrapper {
+  width: 100vw;
+  height: 100vh;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -8,16 +8,33 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/OKRModal.scss";
 
-const OKRModal = (props: any) => {
-  const handleClose = () => {
-    props.setOkr(null);
+const OKRModal = ({
+  okr,
+  setOkr,
+  handleDeleteOkr,
+  editObjective,
+  setEditObjective,
+  updateOkr,
+}: any) => {
+  const handleClose = async () => {
+    await updateOkr({
+      variables: okr,
+    });
+    setOkr(null);
     setEditObjective(false);
   };
-  const [editObjective, setEditObjective] = useState(false);
 
-  return props.okr ? (
+  const handleChangedObjective = async (e: any) => {
+    e.persist();
+    await setOkr((prevOkr: any) => ({
+      ...prevOkr,
+      objective: e.target.value,
+    }));
+  };
+
+  return okr ? (
     <Modal
-      show={!!props.okr}
+      show={!!okr}
       style={{ borderRadius: 0 }}
       centered
       onHide={handleClose}
@@ -26,22 +43,14 @@ const OKRModal = (props: any) => {
         <Modal.Title>
           {!editObjective && (
             <div className="objective" onClick={() => setEditObjective(true)}>
-              {props.okr.objective}
+              {okr.objective}
             </div>
           )}
           {editObjective && (
             <InputGroup>
               <FormControl
-                value={props.okr.objective}
-                onChange={(e: any) => {
-                  e.persist();
-                  props.setOkr((prevOkr: any) => {
-                    return {
-                      ...prevOkr,
-                      objective: e.target.value,
-                    };
-                  });
-                }}
+                value={okr.objective}
+                onChange={(e: any) => handleChangedObjective(e)}
               ></FormControl>
               <InputGroup.Append>
                 <Button
@@ -56,16 +65,14 @@ const OKRModal = (props: any) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {props.okr.keyResults &&
-          props.okr.keyResults.map((kr: any) => (
-            <p key={kr._id}>{kr.keyResult}</p>
-          ))}
+        {okr.keyResults &&
+          okr.keyResults.map((kr: any) => <p key={kr._id}>{kr.keyResult}</p>)}
       </Modal.Body>
       <Modal.Footer>
         <Button
           className="deleteButton"
           variant="outline-danger"
-          onClick={() => props.handleDeleteOkr(props.okr)}
+          onClick={() => handleDeleteOkr(okr)}
         >
           Delete OKR
         </Button>

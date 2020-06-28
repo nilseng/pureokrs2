@@ -4,6 +4,8 @@ import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { setContext } from "apollo-link-context";
+import { getIdTokenClaims } from "./react-auth0-spa";
 
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./react-auth0-spa";
@@ -25,10 +27,22 @@ const onRedirectCallback = (appState: any) => {
 };
 
 // TODO: Configure for staging and production
-const httpLink = createHttpLink();
+const httpLink = createHttpLink({ credentials: "include" });
+
+const authLink = setContext(async (_, { headers }) => {
+  // get the authentication token from auth0
+  const token = await getIdTokenClaims();
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token.__raw}` : "",
+    },
+  };
+});
 
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

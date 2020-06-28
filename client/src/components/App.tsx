@@ -17,11 +17,13 @@ import About from "./About";
 
 function App() {
   const [okr, setOkr] = useState<any | null>();
+  const [editObjective, setEditObjective] = useState(false);
+
   return (
     <div className="App">
       <Router history={history}>
         <header>
-          <NavBar setOkr={setOkr} />
+          <NavBar setOkr={setOkr} setEditObjective={setEditObjective} />
         </header>
         <Switch>
           <Route path="/" component={Welcome} exact />
@@ -32,8 +34,15 @@ function App() {
             component={Home}
             okr={okr}
             setOkr={setOkr}
+            editObjective={editObjective}
+            setEditObjective={setEditObjective}
           />
-          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute
+            path="/profile"
+            component={Profile}
+            setOkr={setOkr}
+            setEditObjective={setEditObjective}
+          />
           <PrivateRoute path="/okr-list" component={OKRList} />
           <Route component={NotFoundPage} />
         </Switch>

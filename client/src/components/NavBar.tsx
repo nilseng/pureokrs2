@@ -1,25 +1,28 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Button from "react-bootstrap/Button";
+import { useLocation } from "react-router-dom";
 
 import { useAuth0 } from "../react-auth0-spa";
 import AnimatedLogo from "./AnimatedLogo";
 import "../styles/common/navLink.css";
+import CreateOKR from "./CreateOKR";
 
 const useWindowWidth = () => {
   const [width, setWidth] = useState(0);
-  useLayoutEffect(() => {
+  useEffect(() => {
     const updateWidth = () => {
       setWidth(window.innerWidth);
     };
+    updateWidth();
     window.addEventListener("resize", updateWidth);
   });
   return width;
 };
 
-const NavBar = (props: any) => {
+const NavBar = ({ setOkr, setEditObjective }: any) => {
   const { isAuthenticated, logout } = useAuth0();
+  const location = useLocation();
   const width = useWindowWidth();
   const title = width >= 768 ? "Pure Objectives and Key Results" : "PureOKRs";
 
@@ -43,14 +46,14 @@ const NavBar = (props: any) => {
         <Nav>
           {isAuthenticated && (
             <>
-              <Nav.Item className="mr-2">
-                <Button
-                  variant="outline-primary"
-                  onClick={() => props.setOkr({ objective: "" })}
-                >
-                  New OKR
-                </Button>
-              </Nav.Item>
+              {location && location.pathname !== "/profile" && (
+                <Nav.Item className="mr-2">
+                  <CreateOKR
+                    setOkr={setOkr}
+                    setEditObjective={setEditObjective}
+                  />
+                </Nav.Item>
+              )}
               <Nav.Link className="mr-2" href="/profile">
                 Profile
               </Nav.Link>
