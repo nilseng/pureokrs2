@@ -12,8 +12,6 @@ let _initOptions = {
   client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
 };
 
-console.log(process.env.REACT_APP_AUTH0_DOMAIN);
-
 const getAuth0Client = () => {
   return new Promise(async (resolve, reject) => {
     let client;
