@@ -6,8 +6,10 @@ import "../styles/OKRTree.scss";
 const OKRTree = (props: any) => {
   const rootOkr = { _id: "root", children: props.okrs };
   const tree = d3.tree();
+  const nodeWidth = 20;
+  const nodeHeight = 12;
   tree.size([100, 100]);
-  tree.nodeSize([20, 12]);
+  tree.nodeSize([nodeWidth, nodeHeight]);
   tree.separation(function separation(a, b) {
     return a.parent === b.parent ? 1.0 : 1.4;
   });
@@ -60,22 +62,26 @@ const OKRTree = (props: any) => {
             {nodes.map(
               (node) =>
                 node.parent && (
-                  <g key={node.data._id}>
-                    <circle
-                      cx={node.x}
-                      cy={node.y}
-                      r="1"
-                      fill="#1c2e3f"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => props.setOkr(node.data)}
+                  <g key={node.data._id} className="okrNode">
+                    <rect
+                      x={node.x - nodeWidth / 2}
+                      y={node.y}
+                      width={nodeWidth}
+                      height={nodeHeight}
+                      rx={1}
+                      ry={1}
                     />
-                    <text
-                      x={node.x + 2}
-                      y={node.y + 0.3}
-                      style={{ fontSize: "1.5" }}
+                    <foreignObject
+                      x={node.x - (nodeWidth - 2) / 2}
+                      y={node.y + 1}
+                      width={nodeWidth - 2}
+                      height={nodeHeight - 2}
+                      onClick={() => props.setOkr(node.data)}
                     >
-                      {node.data.objective}
-                    </text>
+                      <div data-xmlns="http://www.w3.org/1999/xhtml">
+                        <p>{node.data.objective}</p>
+                      </div>
+                    </foreignObject>
                   </g>
                 )
             )}
