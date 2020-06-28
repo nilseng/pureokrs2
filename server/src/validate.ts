@@ -2,10 +2,7 @@ import config from '../../auth_config.json'
 import jwksClient from 'jwks-rsa'
 import jwt, { Algorithm } from 'jsonwebtoken'
 
-// Using REACT_APP prefix to make it work with react (can possibly be removed)
 const domain = process.env.REACT_APP_AUTH0_DOMAIN || config.domain
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID || config.clientId
-const audience = process.env.REACT_APP_AUTH0_AUDIENCE || config.audience
 
 const client = jwksClient({
     jwksUri: `https://${domain}/.well-known/jwks.json`

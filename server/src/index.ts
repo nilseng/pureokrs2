@@ -4,7 +4,12 @@ import path, { join } from 'path'
 import connectToMongoDb from '../database/databaseSetup'
 import { Collection, ObjectID, ObjectId } from 'mongodb'
 import { readFileSync } from 'fs'
+import dotenv from "dotenv"
+
 import isTokenValid from "./validate"
+
+dotenv.config()
+
 const typeDefs = readFileSync(join(__dirname, "./schema.graphql"), "utf8");
 
 const app = express()
