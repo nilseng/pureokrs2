@@ -26,4 +26,6 @@ yarn-debug.log*
 yarn-error.log*
 node_modules
 
-auth_config.json
+.env
+/client/.env
+/server/.env
