@@ -1,7 +1,7 @@
 import { MongoClient, Collection } from 'mongodb';
 
 const connectToMongoDb = async () => {
-    const db_uri = process.env.MONGODB_URI_PUREOKRS2_STAGING || process.env.MONGODB_URI
+    const db_uri = process.env.MONGODB_URI
     if (!db_uri) {
         throw Error('MongoDB URI not found')
     }
