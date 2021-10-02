@@ -22,9 +22,11 @@
     "apollo-server-express": "^2.25.2",
     "axios": "^0.22.0",
     "dotenv": "^8.2.0",
+    "graphql-playground-html": "^1.6.29",
     "graphql-yoga": "^1.18.3",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.8.0",
+    "lodash": "^4.17.21",
     "mongodb": "^3.5.7",
     "ts-node": "^8.8.2",
     "typescript": "^3.8.3"
