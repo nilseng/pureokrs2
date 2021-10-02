@@ -125,9 +125,11 @@ const server = new ApolloServer({
         const user = await isTokenValid(token)
         return { user }
     }
-})
+});
 
-server.applyMiddleware({ app })
+server.start().then(() => {
+    server.applyMiddleware({ app })
+})
 
 //Establishing database connection
 let okrCollection: Collection, keyResultCollection: Collection, userCollection: Collection
